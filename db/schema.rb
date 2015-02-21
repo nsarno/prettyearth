@@ -11,9 +11,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20150221150419) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "countries", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "earth_views", force: :cascade do |t|
+    t.integer  "json_id",    null: false
+    t.integer  "country_id"
+    t.decimal  "lat"
+    t.decimal  "lng"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "earth_views", ["country_id"], name: "index_earth_views_on_country_id", using: :btree
+  add_index "earth_views", ["json_id"], name: "index_earth_views_on_json_id", using: :btree
+
+  add_foreign_key "earth_views", "countries"
 end
