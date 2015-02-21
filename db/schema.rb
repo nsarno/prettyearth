@@ -17,22 +17,25 @@ ActiveRecord::Schema.define(version: 20150221150419) do
   enable_extension "plpgsql"
 
   create_table "countries", force: :cascade do |t|
-    t.string   "name"
+    t.string   "name",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  add_index "countries", ["name"], name: "index_countries_on_name", unique: true, using: :btree
+
   create_table "earth_views", force: :cascade do |t|
-    t.integer  "json_id",    null: false
+    t.integer  "prettyearth_id", null: false
     t.integer  "country_id"
     t.decimal  "lat"
     t.decimal  "lng"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "zoom"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   add_index "earth_views", ["country_id"], name: "index_earth_views_on_country_id", using: :btree
-  add_index "earth_views", ["json_id"], name: "index_earth_views_on_json_id", using: :btree
+  add_index "earth_views", ["prettyearth_id"], name: "index_earth_views_on_prettyearth_id", unique: true, using: :btree
 
   add_foreign_key "earth_views", "countries"
 end
