@@ -36,4 +36,11 @@ class EarthView < ActiveRecord::Base
       nil
     end
   end
+
+  def image
+    image = nil
+    json = EarthView.json_from_prettyearth self.prettyearth_id
+    image = json['dataUri'] unless json.nil?
+    image
+  end
 end
