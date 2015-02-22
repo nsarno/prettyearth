@@ -1,0 +1,4 @@
+= image_tag "#{@earth_view.image}", id: 'earthview'
+#quiz-box.text-center
+  = link_to @earth_view.country.name, @earth_view.gmap_url, target: '_blank', class: "btn btn-lg #{@good_answer ? 'btn-answer-valid' : 'btn-answer-invalid'}"
+  = link_to 'Next', new_quiz_path, class: 'btn btn-lg btn-default'

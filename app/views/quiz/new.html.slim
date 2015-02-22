@@ -1,1 +1,6 @@
-= image_tag "#{@earth_view.image}"
+= image_tag "#{@earth_view.image}", id: 'earthview'
+
+= form_tag '/quiz', id: 'quiz-box', class: 'text-center'
+  = hidden_field_tag 'current', @earth_view.id
+  - @choices.each do |choice|
+    = submit_tag choice.name, class: 'btn btn-lg btn-choice'

@@ -43,4 +43,8 @@ class EarthView < ActiveRecord::Base
     image = json['dataUri'] unless json.nil?
     image
   end
+
+  def gmap_url
+    "https://www.google.com/maps/@#{self.lat.to_f},#{self.lng.to_f},#{self.zoom}z/data=!3m1!1e3"
+  end
 end
